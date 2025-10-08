@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // App.tsx
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/common/Navbar";
@@ -28,4 +29,12 @@ export default function App() {
       </div>
     </Router>
   );
+=======
+export default function App() {
+  return (
+    <div className="p-8 text-center bg-blue-500 text-white text-2xl">
+      Tailwind is working ✅
+    </div>
+  )
+>>>>>>> c94cb16650f480525dd0891ee923941ecea9394e
 }
