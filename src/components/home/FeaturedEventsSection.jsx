@@ -3,9 +3,9 @@ import React from "react";
 import EventCard from "./EventCard";
 
 const events = [
-  { title: "Tech Conference 2025", date: "Jan 20", location: "Addis Ababa", image: "/assets/corporate_conference.jpg" },
-  { title: "Music Fest", date: "Feb 10", location: "Adama", image: "/assets/music_festival.jpg" },
-  { title: "Luxury Wedding", date: "Mar 5", location: "Bahir Dar", image: "/assets/wedding.jpg" },
+  { title: "Tech Conference 2025", date: "Jan 20", location: "Addis Ababa", image: "/images/corporate_conference1.jpg" },
+  { title: "Music Fest", date: "Feb 10", location: "Adama", image: "/images/music_festival1.jpg" },
+  { title: "Luxury Wedding", date: "Mar 5", location: "Bahir Dar", image: "/images/wedding1.jpg" },
 ];
 
 const FeaturedEventsSection = () => {
