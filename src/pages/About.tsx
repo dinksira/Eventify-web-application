@@ -1,13 +1,20 @@
-// src/pages/About.tsx
 import React from "react";
+import AboutHeroSection from "../components/about/AboutHeroSection";
+import CompanyStorySection from "../components/about/CompanyStorySection";
+import MissionVisionSection from "../components/about/MissionVisionSection";
+import WhyChooseUsSection from "../components/about/WhyChooseUsSection";
+import TeamSection from "../components/about/TeamSection";
+import AboutCTASection from "../components/about/AboutCTASection";
 
 const About = () => {
   return (
-    <div className="p-8">
-      <h1 className="text-3xl font-bold mb-4">About Us</h1>
-      <p>
-        Eventify is a platform to discover, manage, and attend amazing events easily.
-      </p>
+    <div>
+      <AboutHeroSection />
+      <CompanyStorySection />
+      <MissionVisionSection />
+      <WhyChooseUsSection />
+      <TeamSection />
+      <AboutCTASection />
     </div>
   );
 };
