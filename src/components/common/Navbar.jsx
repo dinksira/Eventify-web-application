@@ -2,6 +2,13 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
+const menuItems = [
+  { label: "Home", path: "/" },
+  { label: "About", path: "/about" },
+  { label: "Events", path: "/events" },
+  { label: "Contact", path: "/contact" },
+];
+
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -18,19 +25,16 @@ const Navbar = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex space-x-8 items-center">
-            <Link to="/" className="text-gray-700 hover:text-blue-600 transition">
-              Home
-            </Link>
-            <Link to="/about" className="text-gray-700 hover:text-blue-600 transition">
-              About
-            </Link>
-            <Link to="/events" className="text-gray-700 hover:text-blue-600 transition">
-              Events
-            </Link>
-            <Link to="/contact" className="text-gray-700 hover:text-blue-600 transition">
-              Contact
-            </Link>
-            <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
+            {menuItems.map((item) => (
+              <Link
+                key={item.path}
+                to={item.path}
+                className="text-gray-700 hover:text-blue-600 transition"
+              >
+                {item.label}
+              </Link>
+            ))}
+            <button className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600">
               Sign Up
             </button>
           </div>
@@ -39,6 +43,8 @@ const Navbar = () => {
           <div className="md:hidden">
             <button
               onClick={() => setIsOpen(!isOpen)}
+              aria-controls="mobile-menu"
+              aria-expanded={isOpen}
               className="text-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600"
             >
               {isOpen ? (
@@ -56,25 +62,25 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      {isOpen && (
-        <div className="md:hidden bg-white px-4 pb-4 space-y-2 shadow-md">
-          <Link to="/" className="block text-gray-700 hover:text-blue-600 transition">
-            Home
+      <div
+        id="mobile-menu"
+        className={`md:hidden bg-white px-4 pb-4 space-y-2 shadow-md transition-all duration-300 ${
+          isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0 overflow-hidden"
+        }`}
+      >
+        {menuItems.map((item) => (
+          <Link
+            key={item.path}
+            to={item.path}
+            className="block text-gray-700 hover:text-blue-600 transition"
+          >
+            {item.label}
           </Link>
-          <Link to="/about" className="block text-gray-700 hover:text-blue-600 transition">
-            About
-          </Link>
-          <Link to="/events" className="block text-gray-700 hover:text-blue-600 transition">
-            Events
-          </Link>
-          <Link to="/contact" className="block text-gray-700 hover:text-blue-600 transition">
-            Contact
-          </Link>
-          <button className="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition">
-            Sign Up
-          </button>
-        </div>
-      )}
+        ))}
+        <button className="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-600">
+          Sign Up
+        </button>
+      </div>
     </nav>
   );
 };
