@@ -1,21 +1,38 @@
-import React from "react";
-import AboutHeroSection from "../components/about/AboutHeroSection";
-import CompanyStorySection from "../components/about/CompanyStorySection";
-import MissionVisionSection from "../components/about/MissionVisionSection";
-import WhyChooseUsSection from "../components/about/WhyChooseUsSection";
-import TeamSection from "../components/about/TeamSection";
-import AboutCTASection from "../components/about/AboutCTASection";
+import React, { Suspense, lazy } from "react";
+import { Container } from "@/components/ui/container"; // Assuming you have a layout container
 
-const About = () => {
+// Lazy load non-critical sections for better performance
+const AboutHeroSection = lazy(() => import("../components/about/AboutHeroSection"));
+const CompanyStorySection = lazy(() => import("../components/about/CompanyStorySection"));
+const MissionVisionSection = lazy(() => import("../components/about/MissionVisionSection"));
+const WhyChooseUsSection = lazy(() => import("../components/about/WhyChooseUsSection"));
+const TeamSection = lazy(() => import("../components/about/TeamSection"));
+const AboutCTASection = lazy(() => import("../components/about/AboutCTASection"));
+
+// Define section order for easy reordering/maintenance
+const SECTIONS = [
+  AboutHeroSection,
+  CompanyStorySection,
+  MissionVisionSection,
+  WhyChooseUsSection,
+  TeamSection,
+  AboutCTASection,
+] as const;
+
+const About: React.FC = () => {
   return (
-    <div>
-      <AboutHeroSection />
-      <CompanyStorySection />
-      <MissionVisionSection />
-      <WhyChooseUsSection />
-      <TeamSection />
-      <AboutCTASection />
-    </div>
+    <Container className="min-h-screen py-12 space-y-16">
+      <Suspense fallback={<div className="animate-pulse h-64 bg-muted/50 rounded-lg" />}>
+        {SECTIONS.map((Section, index) => (
+          // Hero renders immediately, others lazy load
+          index === 0 ? (
+            <Section key="hero" />
+          ) : (
+            <Section key={`section-${index}`} />
+          )
+        ))}
+      </Suspense>
+    </Container>
   );
 };
 
